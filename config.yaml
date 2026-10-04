@@ -1,0 +1,31 @@
+# Конфигурация решения. Пути к весам — относительные от корня проекта или абсолютные.
+# Пути входа можно также передать аргументами CLI или переменными GRZ_IMAGES_DIR / GRZ_OUT_CSV.
+
+models:
+  detector_weights: solution/models/detector.pt   # нет файла -> contour-фолбэк (демо)
+  backend: auto            # auto | ultralytics | contour
+  imgsz: 640
+  conf: 0.30
+  iou: 0.45
+  device: auto             # auto | cpu | cuda:0
+  half: false              # fp16 на GPU (ускорение в 1.5-2 раза)
+
+recognition:
+  weights: solution/models/crnn.pt                # нет файла -> номера из '#'
+  charset: "0123456789ABEKMHOPCTYX"
+  img_height: 32
+  img_width: 160
+  char_prob_min: 0.55      # ниже — позиция помечается '#'
+  device: auto
+
+post:
+  conf_out_min: 0.12       # строки уверенностью ниже — не пишутся
+  output_other_rows: false # писать ли строки с plate_type=other (эвалуатор их не штрафует)
+  allow_hash_rows: false   # true — печатать строки, где читается <½ знаков (демо без OCR)
+  rect_h: 52               # высота выпрямления знака, px
+
+run:
+  images:                  # каталог по умолчанию (можно переопределить CLI/env)
+  out: result.csv
+  extensions: [".jpg", ".jpeg", ".png"]
+  recursive: false

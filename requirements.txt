@@ -1,0 +1,14 @@
+# Основное (инференс + подготовка данных)
+numpy>=1.24
+opencv-python>=4.8          # на сервере без GUI можно opencv-python-headless
+Pillow>=10.0
+PyYAML>=6.0
+
+# Обучение
+torch>=2.1
+torchvision>=0.16
+ultralytics>=8.2            # YOLOv8 (AGPL-3.0 — см. LICENSE/пояснительную)
+tqdm>=4.66
+
+# Опционально: ускорение инференса (training/export_onnx.py)
+# onnxruntime-gpu>=1.17
